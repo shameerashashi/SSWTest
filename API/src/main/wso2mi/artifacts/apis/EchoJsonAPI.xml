@@ -1,5 +1,5 @@
 <api xmlns="http://ws.apache.org/ns/synapse" name="EchoJsonAPI" context="/echojson">
-    <resource methods="POST" uri-template="/print">
+    <resource methods="GET" uri-template="/print">
         <inSequence>
             <log level="custom">
                 <property name="SEQ-MYEQ-01-COMMON-2-GET-API-KEY" value="END"/>
