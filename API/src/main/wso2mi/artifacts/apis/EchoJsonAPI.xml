@@ -1,5 +1,5 @@
 <api xmlns="http://ws.apache.org/ns/synapse" name="EchoJsonAPI" context="/echojson">
-    <resource methods="GET" uri-template="/print">
+    <resource methods="GET">
         <inSequence>
             <log level="custom">
                 <property name="SEQ-MYEQ-01-COMMON-2-GET-API-KEY" value="END"/>
@@ -7,7 +7,7 @@
             <property name="messageType" value="application/json" scope="axis2"/>
             <property name="NO_ENTITY_BODY" scope="axis2" action="remove"/>
 
-            <property value="https://24c9c232-84f9-4788-ae7a-597a7e4f2b87-nonprod.nonprod.hgln.choreoapis.dev/recrbanradmission/recr-banr-admission-dss/v1.0" name="myeq-dss" scope="default" type="STRING"/>
+            <property value="https://24c9c232-84f9-4788-ae7a-597a7e4f2b87-nonprod-internal.nonprod-internal.hgln.choreoapis.dev/recrbanradmission/recr-banr-admission-dss/v1.0" name="myeq-dss" scope="default" type="STRING"/>
 
             <header expression="fn:concat(get-property('myeq-dss'),'/getApiKey?appName=myequals-proxy')" name="To" scope="default"/>
             <call blocking="true">
