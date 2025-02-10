@@ -1,5 +1,5 @@
 <api xmlns="http://ws.apache.org/ns/synapse" name="TestAPI" context="/testapi">
-    <resource methods="GET">
+    <resource methods="POST">
         <inSequence>
             <property name="messageType" value="application/json" scope="axis2"/>
             <property name="NO_ENTITY_BODY" scope="axis2" action="remove"/>
