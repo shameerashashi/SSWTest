@@ -148,6 +148,7 @@
         <server.path>/</server.path>
         <server.version>${project.runtime.version}</server.version>
         <server.download.link>${testServerDownloadLink}</server.download.link>
+        <mainSequence>SEQ-RBA</mainSequence>
       </properties>
     </profile>
     <profile>
