@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <sequence name="SEQ-RBA" trace="disable" xmlns="http://ws.apache.org/ns/synapse">
     <log level="custom">
-        <property name="SEQ-MYEQ-01-COMMON-2-GET-API-KEY" value="END"/>
+        <property name="SEQ-MYEQ-01-COMMON-2-GET-API-KEY" value="START"/>
     </log>
     <property value="https://24c9c232-84f9-4788-ae7a-597a7e4f2b87-nonprod-internal.nonprod-internal.hgln.choreoapis.dev/recrbanradmission/recr-banr-admission-dss/v1.0" name="myeq-dss" scope="default" type="STRING"/>
 
@@ -16,6 +16,9 @@
 
     <log level="custom">
         <property expression="json-eval($.Fault.faultstring)" name="APIM-KEY-ERROR" scope="default" type="STRING"/>
+    </log>
+    <log level="custom">
+        <property name="SEQ-MYEQ-01-COMMON-2-GET-API-KEY" value="END"/>
     </log>
 
 </sequence>
