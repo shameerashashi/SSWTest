@@ -6,11 +6,11 @@ info:
 servers:
   - url: http://localhost:8290
 paths:
-  /getApiKey:
+  /getAuthor:
     get:
-      summary: Get API Key
+      summary: Get Author
       parameters:
-        - name: appName
+        - name: authorId
           in: query
           required: true
           schema:

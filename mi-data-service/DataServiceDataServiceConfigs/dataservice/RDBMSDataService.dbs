@@ -6,14 +6,14 @@
       <property name="username">$SYSTEM:sv_hitpoints_db_user</property>
       <property name="password">$SYSTEM:sv_hitpoints_db_pwd</property>
    </config>
-   <query id="qGetApiKey" useConfig="rcrbnr">
-      <sql>SELECT api_key&#13;FROM hg.apim_api_keys&#13;WHERE app_name = ?</sql>
-      <result outputType="json">{"records": {"record": [{"appName": "$app_name", "apikey": "$api_key"&#13;}]}}</result>
-      <param name="app_name" optional="false" sqlType="STRING"/>
+   <query id="qGetAuthor" useConfig="rcrbnr">
+      <sql>SELECT * FROM Rfam.author where author_id = ?</sql>
+      <result outputType="json">{"records": {"record": [{"author_id": "$author_id", "name": "$name"}]}}</result>
+      <param name="author_id" optional="false" sqlType="STRING"/>
    </query>
-   <resource method="GET" path="getApiKey">
-      <call-query href="qGetApiKey">
-         <with-param name="app_name" query-param="appName"/>
+   <resource method="GET" path="getAuthor">
+      <call-query href="qGetAuthor">
+         <with-param name="author_id" query-param="authorId"/>
       </call-query>
    </resource>   
 </data>
