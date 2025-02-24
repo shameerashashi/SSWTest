@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sequence name="WeatherToLogsSequence" trace="disable" xmlns="http://ws.apache.org/ns/synapse">
+    <log level="full">
+        <property name="TestMessage" value="############## This is a test message from a Manual Task."/>
+    </log>
+</sequence>
