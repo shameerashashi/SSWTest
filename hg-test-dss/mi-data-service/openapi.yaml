@@ -1,0 +1,24 @@
+openapi: 3.0.1
+info:
+  title: WSO2 Synapse Data Service API
+  version: 1.0.0
+  description: API Definition of Data service integration
+servers:
+  - url: http://localhost:8290
+paths:
+  /getApiKey:
+    get:
+      summary: Get API Key
+      parameters:
+        - name: appName
+          in: query
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                type: object

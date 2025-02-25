@@ -1,0 +1,19 @@
+<data name="DS_RBA_DSS" serviceNamespace="" serviceGroup="" transports="http https">
+   <description>DS_RBA_DSS</description>
+   <config enableOData="false" id="rcrbnr">
+      <property name="driverClassName">oracle.jdbc.driver.OracleDriver</property>
+      <property name="url">$SYSTEM:sv_hitpoints_db_url</property>
+      <property name="username">$SYSTEM:sv_hitpoints_db_user</property>
+      <property name="password">$SYSTEM:sv_hitpoints_db_pwd</property>
+   </config>
+   <query id="qGetApiKey" useConfig="rcrbnr">
+      <sql>SELECT api_key&#13;FROM hg.apim_api_keys&#13;WHERE app_name = ?</sql>
+      <result outputType="json">{"records": {"record": [{"appName": "$app_name", "apikey": "$api_key"&#13;}]}}</result>
+      <param name="app_name" optional="false" sqlType="STRING"/>
+   </query>
+   <resource method="GET" path="getApiKey">
+      <call-query href="qGetApiKey">
+         <with-param name="app_name" query-param="appName"/>
+      </call-query>
+   </resource>   
+</data>
