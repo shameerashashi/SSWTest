@@ -61,27 +61,4 @@
          <with-param name="EmployeeNumber" query-param="EmployeeNumber"/>
       </call-query>
    </operation>
-   <resource method="GET" path="Employee/{EmployeeNumber}">
-      <call-query href="GetEmployeeDetails">
-         <with-param name="EmployeeNumber" query-param="EmployeeNumber"/>
-      </call-query>
-   </resource>
-   <resource method="POST" path="Employee">
-      <call-query href="AddEmployeeDetails">
-         <with-param name="EmployeeNumber" query-param="EmployeeNumber"/>
-         <with-param name="FirstName" query-param="FirstName"/>
-         <with-param name="LastName" query-param="LastName"/>
-         <with-param name="Email" query-param="Email"/>
-         <with-param name="Salary" query-param="Salary"/>
-      </call-query>
-   </resource>
-   <resource method="PUT" path="Employee">
-      <call-query href="UpdateEmployeeDetails">
-         <with-param name="LastName" query-param="LastName"/>
-         <with-param name="FirstName" query-param="FirstName"/>
-         <with-param name="Email" query-param="Email"/>
-         <with-param name="Salary" query-param="Salary"/>
-         <with-param name="EmployeeNumber" query-param="EmployeeNumber"/>
-      </call-query>
-   </resource>
 </data>
