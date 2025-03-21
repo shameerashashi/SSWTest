@@ -6,11 +6,12 @@
 
             <property name="init" scope="default" type="STRING" value="false"/>
 
-            <property name="accum" scope="default" type="STRING" expression="$body"/>
+            <property name="accum" scope="default" type="STRING" expression="json-eval($)"/>
+
             <payloadFactory media-type="json" template-type="freemarker">
                     <format><![CDATA[{
-                        "init": "${ctx.user_name}",
-                        "customer_id" : "${ctx.user_name}"
+                        "init": "${ctx.init}",
+                        "customer_id" : "${ctx.init}"
                         }]]>
                     </format>
                     <args/>
