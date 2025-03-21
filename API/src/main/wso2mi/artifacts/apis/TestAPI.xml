@@ -3,6 +3,27 @@
         <inSequence>
             <property name="messageType" value="application/json" scope="axis2"/>
             <property name="NO_ENTITY_BODY" scope="axis2" action="remove"/>
+
+            <property name="init" value="false"/>
+            <property expression="$body" name="accum"/>
+
+            <payloadFactory media-type="json" template-type="freemarker">
+                    <format><![CDATA[
+                        {
+                            "accum": [
+                                <#if ctx.init == "false">
+                                    <#list ctx.accum as course>
+                                        ${course}<#sep>, </#sep>
+                                    </#list>
+                                </#if>
+                                <#list payload as course>
+                                    ${course}<#sep>, 
+                                </#list>
+                            ]
+                        }]]>
+                    </format>
+                    <args/>
+            </payloadFactory>
             <respond/>
         </inSequence>
     </resource>
