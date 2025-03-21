@@ -2,12 +2,12 @@
     <resource methods="POST">
         <inSequence>
             <property name="messageType" value="application/json" scope="axis2"/>
-            
+            <property name="NO_ENTITY_BODY" scope="axis2" action="remove"/>
 
             <property name="init" scope="default" type="STRING" value="false"/>
 
             <property name="accum" scope="default" type="STRING" expression="$body"/>
-
+<respond/>
             <payloadFactory media-type="json" template-type="freemarker">
                     <format><![CDATA[
                         {
