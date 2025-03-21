@@ -8,13 +8,15 @@
 
             <property name="accum" scope="default" type="STRING" expression="json-eval($)"/>
 
-            <property expression="json-eval($)" name="response_Json"/>
+            <log>
+                <property expression="json-eval($)" name="response_Json"/>
+            </log>
 
             <payloadFactory media-type="json" template-type="freemarker">
                     <format><![CDATA[
                         {
                             "accum": [
-                                <#list ctx.accum as course>
+                                <#list payload as course>
                                     ${course}<#sep>, </#sep>
                                 </#list>
                             ]
