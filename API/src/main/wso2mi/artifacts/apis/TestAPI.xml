@@ -31,17 +31,4 @@
             <respond/>
         </inSequence>
     </resource>
-
-    <resource methods="POST" url-pattern="/resource2">
-        <inSequence>
-            <!-- Ensure JSON message format -->
-            <property name="messageType" value="application/json" scope="axis2"/>
-            <property name="NO_ENTITY_BODY" scope="axis2" action="remove"/>
-
-            
-            
-            <respond/>
-
-        </inSequence>
-    </resource>
 </api>
