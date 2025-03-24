@@ -8,7 +8,15 @@
 
             <property name="accum" scope="default" type="STRING" expression="json-eval($)"/>
 
-            <property name="incomingPayload" scope="default" expression="json-eval($)" type="OM"/>
+            <property name="incomingPayload" scope="default" expression="json-eval($)" />
+
+            <log>
+                <property name="DEBUG_incomingPayload (raw)" expression="get-property('incomingPayload')" />
+            <log>
+
+            <log>
+                <property name="DEBUG_incomingPayload (raw2)" expression="json-eval(get-property('incomingPayload'))" />
+            <log>
 
             <payloadFactory media-type="json" template-type="freemarker">
     <format><![CDATA[
