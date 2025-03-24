@@ -16,9 +16,7 @@
                     <format><![CDATA[
                         {
                             "accum": [
-                                <#list payload as course>
-                                    ${course.name}
-                                </#list>
+                                ${payload}
                             ]
                         }]]>
                     </format>
