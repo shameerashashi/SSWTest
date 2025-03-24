@@ -38,13 +38,7 @@
             <property name="messageType" value="application/json" scope="axis2"/>
             <property name="NO_ENTITY_BODY" scope="axis2" action="remove"/>
 
-            <log>
-                <!-- Store incoming JSON array -->
-                <property name="array1" scope="default" expression="json-eval($)" />
-
-                <!-- Duplicate input array to 'extraCourses' -->
-                <property name="array2" scope="default" expression="json-eval($)" />
-            </log>
+            
             
             <respond/>
 
