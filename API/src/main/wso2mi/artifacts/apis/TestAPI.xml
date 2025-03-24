@@ -14,10 +14,17 @@
             <payloadFactory media-type="json" template-type="freemarker">
                     <format><![CDATA[
                         {
-                            "accum":
-                                ${ctx.response_Json}
-                        }]]>
-                    </format>
+                            "accum": [
+                                <#if ctx.init == "false">
+                                    <#list ctx.response_Json as course>
+                                    ${course}<#sep>, </#sep>
+                                    </#list>
+                                </#if>
+                                <#list payload as course>
+                                    ${course}<#sep>, 
+                        </#list>
+                            ]
+                        }]]></format>
                     <args/>
             </payloadFactory>
             <respond/>
