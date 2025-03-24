@@ -8,18 +8,24 @@
 
             <property name="accum" scope="default" type="STRING" expression="json-eval($)"/>
 
-            <property name="response" scope="default" expression="json-eval($)" />
+            <property name="incomingPayload" scope="default" expression="json-eval($)"/>
             
 
             <payloadFactory media-type="json" template-type="freemarker">
-                    <format><![CDATA[
-                        {
-                            "accum": [
-                                <#list ctx.response as item>${item}<#if item_has_next>,</#if></#list>
-                            ]
-                        }]]></format>
-                    <args/>
-            </payloadFactory>
+    <format><![CDATA[
+        {
+            "accum": [
+                <#if ctx.incomingPayload?? && ctx.incomingPayload?is_sequence>
+                    <#list ctx.incomingPayload as item>
+                        ${item?no_esc}
+                        <#if item_has_next>,</#if>
+                    </#list>
+                </#if>
+            ]
+        }
+    ]]></format>
+    <args/>
+</payloadFactory>
             <respond/>
         </inSequence>
     </resource>
