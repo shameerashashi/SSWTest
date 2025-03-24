@@ -8,7 +8,7 @@
 
             <property name="accum" scope="default" type="STRING" expression="json-eval($)"/>
 
-            <property name="response" scope="default" type="STRING" expression="json-eval($)" />
+            <property name="response" scope="default" expression="json-eval($)" />
             
 
             <payloadFactory media-type="json" template-type="freemarker">
