@@ -17,7 +17,7 @@
             "accum": [
                 <#if ctx.incomingPayload?? && ctx.incomingPayload?is_sequence>
                     <#list ctx.incomingPayload as item>
-                        ${item?no_esc}
+                        ${item}
                         <#if item_has_next>,</#if>
                     </#list>
                 </#if>
