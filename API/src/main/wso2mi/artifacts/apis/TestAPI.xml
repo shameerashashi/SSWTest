@@ -1,5 +1,5 @@
 <api xmlns="http://ws.apache.org/ns/synapse" name="TestAPI" context="/testapi">
-    <resource methods="POST">
+<resource methods="POST" url-pattern="/resource1">
         <inSequence>
             <!-- Ensure JSON message format -->
             <property name="messageType" value="application/json" scope="axis2"/>
@@ -11,13 +11,58 @@
             <!-- Duplicate input array to 'extraCourses' -->
             <property name="extraCourses" scope="default" expression="json-eval($)" />
 
-             <!-- Merge the arrays: originalPayload + extraCourses -->
-             <log>
-                <property name="mergedCourses" expression="concat($['originalPayload'], $['extraCourses'])"/>
-            </log>
+            <!-- Merge both arrays in response -->
+            <payloadFactory media-type="json" template-type="freemarker">
+                <format><![CDATA[
+                    {
+                        "mergedCourses": [
+                            <#list ctx.originalPayload as item>
+                                ${item}<#if item_has_next>,</#if>
+                            </#list>,
+                            <#list ctx.extraCourses as item>
+                                ${item}<#if item_has_next>,</#if>
+                            </#list>
+                        ]
+                    }
+                ]]></format>
+                <args/>
+            </payloadFactory>
 
-            <!-- Respond with the merged array -->
-            <respond>
+            <respond/>
+        </inSequence>
+    </resource>
+
+    <resource methods="POST" url-pattern="/resource2">
+        <inSequence>
+            <!-- Ensure JSON message format -->
+            <property name="messageType" value="application/json" scope="axis2"/>
+            <property name="NO_ENTITY_BODY" scope="axis2" action="remove"/>
+
+            <!-- Store incoming JSON array -->
+            <property name="array1" scope="default" expression="json-eval($)" />
+
+            <!-- Duplicate input array to 'extraCourses' -->
+            <property name="array2" scope="default" expression="json-eval($)" />
+            
+            <enrich>
+                <source type="property" property="array1" />
+                <target type="property" property="mergedArray" action="replace" />
+            </enrich>
+
+            <enrich>
+                <source type="property" property="array2" />
+                <target type="property" property="mergedArray" action="append" />
+            </enrich>
+
+            <payloadFactory media-type="json">
+                <format>
+                    {
+                        "mergedArray": ${ctx.mergedArray}
+                    }
+                </format>
+            </payloadFactory>
+            <respond/>
+            
         </inSequence>
     </resource>
 </api>
