@@ -14,9 +14,8 @@
             <payloadFactory media-type="json" template-type="freemarker">
                     <format><![CDATA[
                         {
-                            "accum": [
+                            "accum":
                                 ${ctx.response_Json}
-                            ]
                         }]]>
                     </format>
                     <args/>
