@@ -38,31 +38,16 @@
             <property name="messageType" value="application/json" scope="axis2"/>
             <property name="NO_ENTITY_BODY" scope="axis2" action="remove"/>
 
-            <!-- Store incoming JSON array -->
-            <property name="array1" scope="default" expression="json-eval($)" />
+            <log>
+                <!-- Store incoming JSON array -->
+                <property name="array1" scope="default" expression="json-eval($)" />
 
-            <!-- Duplicate input array to 'extraCourses' -->
-            <property name="array2" scope="default" expression="json-eval($)" />
+                <!-- Duplicate input array to 'extraCourses' -->
+                <property name="array2" scope="default" expression="json-eval($)" />
+            </log>
             
-            <enrich>
-                <source type="property" property="array1" />
-                <target type="property" property="mergedArray" action="replace" />
-            </enrich>
-
-            <enrich>
-                <source type="property" property="array2" />
-                <target type="property" property="mergedArray" action="append" />
-            </enrich>
-
-            <payloadFactory media-type="json">
-                <format>
-                    {
-                        "mergedArray": ${ctx.mergedArray}
-                    }
-                </format>
-            </payloadFactory>
             <respond/>
-            
+
         </inSequence>
     </resource>
 </api>
