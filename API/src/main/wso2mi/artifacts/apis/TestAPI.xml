@@ -8,14 +8,14 @@
 
             <property name="accum" scope="default" type="STRING" expression="json-eval($)"/>
 
-            <property name="response_Json" scope="default" type="STRING" expression="json-eval($)" />
+            <property name="response" scope="default" type="STRING" expression="json-eval($)" />
             
 
             <payloadFactory media-type="json" template-type="freemarker">
                     <format><![CDATA[
                         {
                             "accum": [
-                                <#list ctx.response_Json as item>${item}<#if item_has_next>,</#if></#list>
+                                <#list ctx.response as item>${item}<#if item_has_next>,</#if></#list>
                             ]
                         }]]></format>
                     <args/>
