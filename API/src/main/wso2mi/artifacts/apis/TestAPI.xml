@@ -1,38 +1,32 @@
 <api xmlns="http://ws.apache.org/ns/synapse" name="TestAPI" context="/testapi">
     <resource methods="POST">
         <inSequence>
-            <!-- Capture incoming JSON payload -->
-            <property name="incomingPayload" scope="default" expression="json-eval($)" type="OM"/>
+            <!-- Ensure JSON message format -->
+            <property name="messageType" value="application/json" scope="axis2"/>
+            <property name="NO_ENTITY_BODY" scope="axis2" action="remove"/>
 
-            <!-- Define additional JSON elements -->
-            <property name="extraCourses" scope="default" type="OM">
-                <jsonArray>
-                    <jsonElement>
-                        <id>3</id>
-                        <name>New Course</name>
-                    </jsonElement>
-                    <jsonElement>
-                        <id>4</id>
-                        <name>Another Course</name>
-                    </jsonElement>
-                </jsonArray>
-            </property>
+            <!-- Store incoming JSON array -->
+            <property name="originalPayload" scope="default" expression="json-eval($)" />
 
-            <!-- Merge both JSON arrays and format response -->
+            <!-- Duplicate input array to 'extraCourses' -->
+            <property name="extraCourses" scope="default" expression="json-eval($)" />
+
+            <!-- Merge both arrays in response -->
             <payloadFactory media-type="json" template-type="freemarker">
                 <format><![CDATA[
                     {
-                        "courses": [
-                            <#list ctx.incomingPayload + ctx.extraCourses as item>
-                                ${item}
-                                <#if item_has_next>,</#if>
+                        "mergedCourses": [
+                            <#list ctx.originalPayload as item>
+                                ${item}<#if item_has_next>,</#if>
+                            </#list>,
+                            <#list ctx.extraCourses as item>
+                                ${item}<#if item_has_next>,</#if>
                             </#list>
                         ]
                     }
                 ]]></format>
                 <args/>
             </payloadFactory>
-
             <respond/>
         </inSequence>
     </resource>
