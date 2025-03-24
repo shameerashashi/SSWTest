@@ -16,7 +16,6 @@
                         {
                             "accum": [
                                 <#list ctx.response_Json as item>${item}<#if item_has_next>,</#if></#list>
-                        </#list>
                             ]
                         }]]></format>
                     <args/>
