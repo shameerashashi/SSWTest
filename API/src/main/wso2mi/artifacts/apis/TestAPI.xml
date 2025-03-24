@@ -11,23 +11,13 @@
             <!-- Duplicate input array to 'extraCourses' -->
             <property name="extraCourses" scope="default" expression="json-eval($)" />
 
-            <!-- Merge both arrays in response -->
-            <payloadFactory media-type="json" template-type="freemarker">
-                <format><![CDATA[
-                    {
-                        "mergedCourses": [
-                            <#list ctx.originalPayload as item>
-                                ${item}<#if item_has_next>,</#if>
-                            </#list>,
-                            <#list ctx.extraCourses as item>
-                                ${item}<#if item_has_next>,</#if>
-                            </#list>
-                        ]
-                    }
-                ]]></format>
-                <args/>
-            </payloadFactory>
-            <respond/>
+             <!-- Merge the arrays: originalPayload + extraCourses -->
+             <log>
+                <property name="mergedCourses" expression="concat($['originalPayload'], $['extraCourses'])"/>
+            </log>
+
+            <!-- Respond with the merged array -->
+            <respond>
         </inSequence>
     </resource>
 </api>
