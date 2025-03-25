@@ -1,5 +1,5 @@
 <api xmlns="http://ws.apache.org/ns/synapse" name="TestAPI" context="/testapi">
-<resource methods="POST">
+    <resource methods="POST">
         <inSequence>
             <!-- Ensure JSON message format -->
             <property name="messageType" value="application/json" scope="axis2"/>
@@ -11,10 +11,11 @@
             <!-- Duplicate input array to 'extraCourses' -->
             <property name="extraCourses" scope="default" expression="json-eval($)" type="JSON"/>
 
-            <enrich>
-                <source clone="true" property="originalPayload"/>
-                <target type="child" expression="//jsonArray"/>
-            </enrich>
+            <foreach id="foreach_1" expression="json-eval($ctx:extraCourses)">
+                <log level="custom">
+                    <property name="message" value="##### ForEach ######"/>
+                </log>
+            </foreach>
 
             
             <respond/>
