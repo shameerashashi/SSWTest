@@ -25,7 +25,7 @@
             <script language="js"><![CDATA[
                 var originalPayload = mc.getProperty('originalPayload');
                 var extraCourses = mc.getProperty('extraCourses');
-                const course = originalPayload.concat(extraCourses);
+                const course = Object.assign(originalPayload, extraCourses);
                 mc.setProperty('curses', course);
             ]]></script>
 
