@@ -1,5 +1,5 @@
 <api xmlns="http://ws.apache.org/ns/synapse" name="TestAPI" context="/testapi">
-<resource methods="POST" uri-template="/resource1">
+<resource methods="POST">
         <inSequence>
             <!-- Ensure JSON message format -->
             <property name="messageType" value="application/json" scope="axis2"/>
