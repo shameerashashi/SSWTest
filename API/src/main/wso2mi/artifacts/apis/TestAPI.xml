@@ -11,21 +11,12 @@
             <!-- Duplicate input array to 'extraCourses' -->
             <property name="extraCourses" scope="default" expression="json-eval($)" type="JSON"/>
 
-            <payloadFactory media-type="json" template-type="freemarker">
-                <format><![CDATA[
-                    {
-                        "accum": [
-                            <#list ctx.originalPayload as item>
-                                ${item}<#if item_has_next>,</#if>
-                            </#list>,
-                            <#list ctx.extraCourses as item>
-                                ${item}<#if item_has_next>,</#if>
-                            </#list>
-                        ]
-                    }
-                ]]></format>
-                <args/>
-            </payloadFactory>
+            <enrich>
+                <source clone="true" property="originalPayload"/>
+                <target type="child" expression="//jsonArray"/>
+            </enrich>
+
+            
             <respond/>
         </inSequence>
     </resource>
