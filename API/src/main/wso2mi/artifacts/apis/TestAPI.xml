@@ -17,9 +17,13 @@
 
             <property name="extraCourses" scope="default" expression="json-eval($)" type="JSON"/>
 
+            <enrich>
+                <source clone="true" property="originalPayload" type="property"/>
+                <target type="body"/>
+            </enrich>
+
             <foreach id="foreach_1" expression="json-eval($ctx:extraCourses)">
                 <sequence>
-
                     <log>
                         <property expression="json-eval($)" name="Extra Course ########### "/>
                     </log>
