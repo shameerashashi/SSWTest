@@ -11,6 +11,10 @@
             <!-- Duplicate input array to 'extraCourses' -->
             <property name="extraCourses" scope="default" expression="json-eval($)" />
 
+            <log>
+                <property name="requestBody" expression="json-eval($)" />
+            </log>
+
             <!-- Merge both arrays in response -->
             <payloadFactory media-type="json" template-type="freemarker">
                 <format><![CDATA[
