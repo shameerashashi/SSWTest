@@ -12,9 +12,11 @@
             <property name="extraCourses" scope="default" expression="json-eval($)" type="JSON"/>
 
             <foreach id="foreach_1" expression="json-eval($ctx:extraCourses)">
-                <log level="custom">
-                    <property name="message" value="##### ForEach ######"/>
-                </log>
+                <sequence>
+                    <log level="custom">
+                        <property name="message" value="##### ForEach ######"/>
+                    </log>
+                </sequence>
             </foreach>
 
             
