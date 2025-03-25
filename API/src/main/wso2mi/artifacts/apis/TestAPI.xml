@@ -29,27 +29,15 @@
                 mc.setProperty('courses', courses);
             ]]></script>
 
-            <script language="js"><![CDATA[
-                var jsArray1 = JSON.stringify(mc.getProperty('originalPayload'));
-                var jsArray1_items = jsArray1.replace("[", "").replace("]", "");
-
-                var jsArray2 = JSON.stringify(mc.getProperty('extraCourses'));
-                var jsArray2_items = jsArray2.replace("[", "").replace("]", "");
-                
-                mc.setProperty('jsArray1_items', jsArray1_items);
-                mc.setProperty('jsArray2_items', jsArray2_items);
-            ]]></script>
-
-           
+            <log level="custom">
+                <property name="All Courses ### " expression="$ctx:courses"/>
+            </log>
 
             <payloadFactory media-type="json" template-type="freemarker">
                 <format><![CDATA[
-                        {
-                            "accum":
-                                ${ctx.jsArray1_items},${ctx.jsArray2_items}
+                        {"accum":${ctx.courses}
                         }]]>
                 </format>
-                <args/>
             </payloadFactory>
             
             <respond/>
