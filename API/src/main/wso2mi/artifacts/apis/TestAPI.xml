@@ -29,12 +29,15 @@
                 mc.setProperty('curses', course);
             ]]></script>
 
-            <format><![CDATA[
+            <payloadFactory media-type="json" template-type="freemarker">
+                <format><![CDATA[
                         {
                             "accum":
                                 ${ctx.course}
                         }]]>
-                    </format>
+                </format>
+                <args/>
+            </payloadFactory>
             
             <respond/>
         </inSequence>
