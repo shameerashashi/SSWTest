@@ -26,10 +26,15 @@
                 var originalPayload = mc.getProperty('originalPayload');
                 var extraCourses = mc.getProperty('extraCourses');
 
+                console.log(originalPayload)
+                console.log(extraCourses)
+
                 var jsArray1 = JSON.parse(originalPayload);
                 var jsArray2 = JSON.parse(extraCourses);
 
                 var courses = jsArray1.concat(jsArray2);
+
+                console.log(courses)
                 mc.setProperty('courses', courses);
             ]]></script>
 
