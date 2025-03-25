@@ -25,15 +25,17 @@
             <script language="js"><![CDATA[
                 var originalPayload = mc.getProperty('originalPayload');
                 var extraCourses = mc.getProperty('extraCourses');
-                const course = Object.assign(originalPayload, extraCourses);
-                mc.setProperty('curses', course);
+                const courses = new Array();
+                courses.push(originalPayload);
+                courses.push(extraCourses);
+                mc.setProperty('courses', courses);
             ]]></script>
 
             <payloadFactory media-type="json" template-type="freemarker">
                 <format><![CDATA[
                         {
                             "accum":
-                                ${ctx.course}
+                                ${ctx.courses}
                         }]]>
                 </format>
                 <args/>
