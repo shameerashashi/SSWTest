@@ -23,20 +23,10 @@
             </log>
 
             <script language="js"><![CDATA[
-                var originalPayload = mc.getProperty('originalPayload');
-                var extraCourses = mc.getProperty('extraCourses');
-
-                console.log(originalPayload)
-                console.log(extraCourses)
-
-                var jsArray1 = JSON.parse(originalPayload);
-                var jsArray2 = JSON.parse(extraCourses);
-
-                var courses = jsArray1.concat(jsArray2);
-                var full_json_string = JSON.stringify(courses);
-
-                console.log(full_json_string)
-                mc.setProperty('courses', full_json_string);
+                var jsArray1 = JSON.parse(mc.getProperty('originalPayload'));
+                var jsArray2 = JSON.parse(mc.getProperty('extraCourses'));
+                var courses = JSON.stringify(jsArray1.concat(jsArray2));
+                mc.setProperty('courses', courses);
             ]]></script>
 
             <log level="custom">
