@@ -13,14 +13,13 @@
 
             <foreach id="foreach_1" expression="json-eval($ctx:extraCourses)">
                 <sequence>
-                    <log level="custom">
-                        <property name="message" value="##### ForEach ######"/>
-                        <property name="content" expression="json-eval($)"/>
-                    </log>
+                    <property name="content" expression="json-eval($)"/>
+                    <enrich>
+                        <source clone="true" property="content" type="property"/>
+                        <target action="child" type="custom" xpath="json-eval($)"/>
+                    </enrich>
                 </sequence>
             </foreach>
-
-            
             <respond/>
         </inSequence>
     </resource>
