@@ -33,9 +33,10 @@
                 var jsArray2 = JSON.parse(extraCourses);
 
                 var courses = jsArray1.concat(jsArray2);
+                var full_json_string = JSON.stringify(courses);
 
-                console.log(courses)
-                mc.setProperty('courses', courses);
+                console.log(full_json_string)
+                mc.setProperty('courses', full_json_string);
             ]]></script>
 
             <log level="custom">
