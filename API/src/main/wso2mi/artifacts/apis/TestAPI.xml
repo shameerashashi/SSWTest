@@ -12,25 +12,11 @@
             <property name="extraCourses" scope="default" expression="json-eval($)" />
 
             <log>
-                <property name="requestBody" expression="json-eval($)" />
+                <property name="requestBody" expression="json-eval($.[*])" />
             </log>
 
-            <!-- Merge both arrays in response -->
-            <payloadFactory media-type="json" template-type="freemarker">
-                <format><![CDATA[
-                    {
-                        "mergedCourses": [
-                            <#list ctx.originalPayload as item>
-                                ${item}<#if item_has_next>,</#if>
-                            </#list>,
-                            <#list ctx.extraCourses as item>
-                                ${item}<#if item_has_next>,</#if>
-                            </#list>
-                        ]
-                    }
-                ]]></format>
-                <args/>
-            </payloadFactory>
+            
+            
 
             <respond/>
         </inSequence>
