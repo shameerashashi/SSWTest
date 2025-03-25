@@ -30,10 +30,10 @@
             ]]></script>
 
             <script language="js"><![CDATA[
-                var jsArray1 = mc.getProperty('originalPayload');
+                var jsArray1 = JSON.stringify(mc.getProperty('originalPayload'));
                 var jsArray1_items = jsArray1.replace("[", "").replace("]", "");
 
-                var jsArray2 = mc.getProperty('extraCourses');
+                var jsArray2 = JSON.stringify(mc.getProperty('extraCourses'));
                 var jsArray2_items = jsArray2.replace("[", "").replace("]", "");
                 
                 mc.setProperty('jsArray1_items', jsArray1_items);
