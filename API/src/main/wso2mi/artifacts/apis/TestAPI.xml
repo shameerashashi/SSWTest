@@ -31,6 +31,10 @@
                 mc.setProperty('courses', courses);
             ]]></script>
 
+            <log level="custom">
+                <property name="All Courses ### " expression="$ctx:courses"/>
+            </log>
+
             <payloadFactory media-type="json" template-type="freemarker">
                 <format><![CDATA[
                         {
