@@ -15,7 +15,10 @@
                 <args/>
             </payloadFactory>
 
-            <property name="extraCourses" scope="default" expression="json-eval($)" type="JSON"/>
+            <enrich>
+                <source clone="true" xpath="json-eval($)"/>
+                <target property="extraCourses" type="property"/>
+            </enrich>
 
             <enrich>
                 <source clone="true" property="originalPayload" type="property"/>
