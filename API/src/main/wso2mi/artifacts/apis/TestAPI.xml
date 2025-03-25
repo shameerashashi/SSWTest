@@ -8,11 +8,22 @@
             <!-- Store incoming JSON array -->
             <property name="originalPayload" scope="default" expression="json-eval($)" type="JSON"/>
 
-            <!-- Duplicate input array to 'extraCourses' -->
+            <payloadFactory media-type="json">
+                <format>            
+                    [{"id":3, "name":"Course 3"}, {"id":4, "name":"Course 4"}]            
+                </format>
+                <args/>
+            </payloadFactory>
+
             <property name="extraCourses" scope="default" expression="json-eval($)" type="JSON"/>
 
             <foreach id="foreach_1" expression="json-eval($ctx:extraCourses)">
                 <sequence>
+
+                    <log>
+                        <property expression="json-eval($)" name="Extra Course ########### "/>
+                    </log>
+
                     <property name="content" expression="json-eval($)"/>
                     <enrich>
                         <source clone="true" property="content" type="property"/>
