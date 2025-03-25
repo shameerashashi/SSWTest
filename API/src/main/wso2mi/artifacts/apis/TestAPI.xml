@@ -15,6 +15,7 @@
                 <sequence>
                     <log level="custom">
                         <property name="message" value="##### ForEach ######"/>
+                        <property name="content" expression="json-eval($)"/>
                     </log>
                 </sequence>
             </foreach>
