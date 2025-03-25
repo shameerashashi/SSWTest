@@ -6,18 +6,26 @@
             <property name="NO_ENTITY_BODY" scope="axis2" action="remove"/>
 
             <!-- Store incoming JSON array -->
-            <property name="originalPayload" scope="default" expression="json-eval($)" />
+            <property name="originalPayload" scope="default" expression="json-eval($)" type="JSON"/>
 
             <!-- Duplicate input array to 'extraCourses' -->
-            <property name="extraCourses" scope="default" expression="json-eval($)" />
+            <property name="extraCourses" scope="default" expression="json-eval($)" type="JSON"/>
 
-            <log>
-                <property name="requestBody" expression="json-eval($.[*])" />
-            </log>
-
-            
-            
-
+            <payloadFactory media-type="json" template-type="freemarker">
+                <format><![CDATA[
+                    {
+                        "accum": [
+                            <#list ctx.originalPayload as item>
+                                ${item}<#if item_has_next>,</#if>
+                            </#list>,
+                            <#list ctx.extraCourses as item>
+                                ${item}<#if item_has_next>,</#if>
+                            </#list>
+                        ]
+                    }
+                ]]></format>
+                <args/>
+            </payloadFactory>
             <respond/>
         </inSequence>
     </resource>
