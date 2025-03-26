@@ -6,7 +6,7 @@
             <property name="NO_ENTITY_BODY" scope="axis2" action="remove"/>
 
             <!-- Store incoming JSON array -->
-            <property name="tutoringCampaignData" scope="default" expression="json-eval($)" type="JSON"/>
+            <property name="tutoringCampaignData" scope="default" expression="json-eval($)" type="STRING"/>
 
             <payloadFactory media-type="json">
                 <format>            
@@ -26,7 +26,7 @@
                 <args/>
             </payloadFactory>
 
-            <property name="tutorData" scope="default" expression="json-eval($)" type="JSON"/>
+            <property name="tutorData" scope="default" expression="json-eval($)" type="STRING"/>
 
             <log level="custom">
                 <property name="tutoringCampaignData" expression="$ctx:tutoringCampaignData"/>
@@ -34,7 +34,7 @@
             </log>
 
 
-            <foreach id="foreach_1" expression="json-eval($ctx:tutoringCampaignData.items[*])">
+            <foreach id="foreach_1" expression="json-eval($ctx:tutoringCampaignData.items)">
                     <sequence>
                         <property name="tutoringCampaignData" scope="default" expression="json-eval($.values.canvas_student_first_name)" type="JSON"/>
                     </sequence>
