@@ -12,13 +12,13 @@
                 <format>            
                     [
    {
-      "StudentUsername":"Kola",
-      "StudentFirstName":"D00653246",
+      "StudentFirstName":"Kola",
+      "StudentUsername":"D00653246",
       "StudentEmail":"kadeeyojr@gmail.com"
    },
    {
-      "StudentUsername":"Timothy",
-      "StudentFirstName":"D00666502",
+      "StudentFirstName":"Timothy",
+      "StudentUsername":"D00666502",
       "StudentEmail":"timothy_michael_smith@yahoo.com"
    }
 ]            
@@ -34,12 +34,37 @@
             </log>
 
 
-            <foreach id="foreach_1" expression="json-eval($ctx:tutoringCampaignData.items)">
-                    <sequence>
-                        <property name="tutoringCampaignData" scope="default" expression="json-eval($.values.canvas_student_first_name)" type="JSON"/>
-                    </sequence>
-            </foreach>
+            <script language="js"><![CDATA[
+                var tutoringCampaignData = JSON.parse(mc.getProperty('tutoringCampaignData'));
+                var tutoringCampaignItems = tutoringCampaignData.items;
+                var tutorData = JSON.parse(mc.getProperty('tutorData'));
+
+                var arr = [];
+                for(let i = 0; i < tutoringCampaignItems.length; i++) {
+                    for(var x = 0; x < tutorData.length; x++)
+                    {
+                        if(tutorData[x].StudentUsername == tutoringCampaignItems[i].keys.canvas_dnumber_student)
+                        {
+                            arr.push({ 
+                            "studentFirstName" : tutorData[x].StudentFirstName,
+                            "studentUserName"  : tutorData[x].StudentUsername,
+                            "studentEmail"       : tutorData[x].StudentEmail 
+                            });
+                        }
+                    }
+                }
+                var full_json_string = JSON.stringify(arr);
+
+                console.log(full_json_string)
+                mc.setProperty('courses', full_json_string);
+            ]]></script>
             
+            <payloadFactory media-type="json" template-type="freemarker">
+                <format><![CDATA[
+                        ${ctx.full_json_string}
+                        ]]>
+                </format>
+            </payloadFactory>
             
             <respond/>
         </inSequence>
