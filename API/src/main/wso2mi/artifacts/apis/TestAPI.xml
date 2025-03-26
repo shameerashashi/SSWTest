@@ -34,7 +34,7 @@
             </log>
 
 
-            <foreach id="foreach_1" expression="json-eval($ctx:tutoringCampaignData.items)">
+            <foreach id="foreach_1" expression="json-eval($ctx:tutoringCampaignData.items[*])">
                     <sequence>
                         <property name="tutoringCampaignData" scope="default" expression="json-eval($.values.canvas_student_first_name)" type="JSON"/>
                     </sequence>
