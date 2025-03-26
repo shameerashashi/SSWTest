@@ -29,10 +29,16 @@
             <property name="tutorData" scope="default" expression="json-eval($)" type="JSON"/>
 
             <log level="custom">
-                <property name="accum" expression="$ctx:tutoringCampaignData"/>
-                <property name="init" expression="$ctx:tutorData"/>
+                <property name="tutoringCampaignData" expression="$ctx:tutoringCampaignData"/>
+                <property name="tutorData" expression="$ctx:tutorData"/>
             </log>
 
+
+            <foreach id="foreach_1" expression="json-eval($ctx:tutoringCampaignData.items)">
+                    <sequence>
+                        <property name="tutoringCampaignData" scope="default" expression="json-eval($.values.canvas_student_first_name)" type="JSON"/>
+                    </sequence>
+            </foreach>
             
             
             <respond/>
