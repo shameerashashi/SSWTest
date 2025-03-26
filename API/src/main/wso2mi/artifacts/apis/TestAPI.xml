@@ -56,12 +56,12 @@
                 var full_json_string = JSON.stringify(arr);
 
                 console.log(full_json_string)
-                mc.setProperty('courses', full_json_string);
+                mc.setProperty('items', full_json_string);
             ]]></script>
             
             <payloadFactory media-type="json" template-type="freemarker">
                 <format><![CDATA[
-                        ${ctx.full_json_string}
+                        ${ctx.items}
                         ]]>
                 </format>
             </payloadFactory>
