@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<endpoint name="GetCourseDataEndpoint" xmlns="http://ws.apache.org/ns/synapse">
+    <http method="get" uri-template="{uri.var.GetCourseData}">
+        <suspendOnFailure>
+            <errorCodes>-1</errorCodes>
+            <initialDuration>-1</initialDuration>
+            <progressionFactor>1.0</progressionFactor>
+        </suspendOnFailure>
+        <markForSuspension>
+            <errorCodes>-1</errorCodes>
+            <retriesBeforeSuspension>3</retriesBeforeSuspension>
+            <retryDelay>1000</retryDelay>
+        </markForSuspension>
+    </http>
+</endpoint>

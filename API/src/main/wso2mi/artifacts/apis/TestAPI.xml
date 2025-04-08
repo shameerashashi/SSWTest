@@ -4,68 +4,8 @@
             <!-- Ensure JSON message format -->
             <property name="messageType" value="application/json" scope="axis2"/>
             <property name="NO_ENTITY_BODY" scope="axis2" action="remove"/>
-
-            <!-- Store incoming JSON array -->
-            <property name="tutoringCampaignData" scope="default" expression="json-eval($)" type="STRING"/>
-
-            <payloadFactory media-type="json">
-                <format>            
-                    [
-   {
-      "StudentFirstName":"Kola",
-      "StudentUsername":"D00653246",
-      "StudentEmail":"kadeeyojr@gmail.com"
-   },
-   {
-      "StudentFirstName":"Timothy",
-      "StudentUsername":"D00666502",
-      "StudentEmail":"timothy_michael_smith@yahoo.com"
-   }
-]            
-                </format>
-                <args/>
-            </payloadFactory>
-
-            <property name="tutorData" scope="default" expression="json-eval($)" type="STRING"/>
-
-            <log level="custom">
-                <property name="tutoringCampaignData" expression="$ctx:tutoringCampaignData"/>
-                <property name="tutorData" expression="$ctx:tutorData"/>
-            </log>
-
-
-            <script language="js"><![CDATA[
-                var tutoringCampaignData = JSON.parse(mc.getProperty('tutoringCampaignData'));
-                var tutoringCampaignItems = tutoringCampaignData.items;
-                var tutorData = JSON.parse(mc.getProperty('tutorData'));
-
-                var arr = [];
-                for(let i = 0; i < tutoringCampaignItems.length; i++) {
-                    for(var x = 0; x < tutorData.length; x++)
-                    {
-                        if(tutorData[x].StudentUsername == tutoringCampaignItems[i].keys.canvas_dnumber_student)
-                        {
-                            arr.push({ 
-                            "studentFirstName" : tutorData[x].StudentFirstName,
-                            "studentUserName"  : tutorData[x].StudentUsername,
-                            "studentEmail"       : tutorData[x].StudentEmail 
-                            });
-                        }
-                    }
-                }
-                var full_json_string = JSON.stringify(arr);
-
-                console.log(full_json_string)
-                mc.setProperty('items', full_json_string);
-            ]]></script>
-            
-            <payloadFactory media-type="json" template-type="freemarker">
-                <format><![CDATA[
-                        ${ctx.items}
-                        ]]>
-                </format>
-            </payloadFactory>
-            
+            <property value="1" name="page" scope="default" type="INTEGER"/>
+            <sequence key="GetCourseDataPagniated"/>
             <respond/>
         </inSequence>
     </resource>

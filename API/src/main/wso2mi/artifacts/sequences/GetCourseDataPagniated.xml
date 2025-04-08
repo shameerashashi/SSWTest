@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sequence name="GetCourseDataPagniated" statistics="enable" trace="enable" xmlns="http://ws.apache.org/ns/synapse">
+	<!-- set per page value as 100 -->
+	<property value="https://reqres.in/api/users" name="apiurl" scope="default" type="INTEGER"/>
+	<property value="2" name="perPage" scope="default" type="INTEGER"/>
+	<log level="custom">
+		<property name="Message" value=" ****** Executing GetCourseDataPagniated ****** "/>
+		<property name="perPage_value" expression="$ctx:perPage"/>
+		<property name="Page_value" expression="$ctx:page"/>
+	</log>
+	<!-- added else section when checking the page value -->
+	<script language="js"><![CDATA[
+        var per_page = mc.getProperty('perPage');
+        var page = mc.getProperty('page');
+        var querySuffix = "?page=" + page + "&per_page=" + per_page;
+		page++;
+		mc.setProperty('page', page);
+        mc.setProperty("querySuffix", querySuffix);]]></script>
+	<property expression="fn:concat($ctx:apiurl, $ctx:querySuffix)" name="uri.var.GetCourseData" scope="default" type="STRING"/>
+	<log level="custom">
+		<property name="message" value="Before get course data"/>
+		<property expression="$ctx:uri.var.GetCourseData" name="url"/>
+	</log>
+	<call>
+		<endpoint key="GetCourseDataEndpoint"/>
+	</call>
+	<log>
+		<property name="message" value="After get course data"/>
+		<property expression="$body" name="response"/>
+		<property expression="json-eval($)" name="response_Json"/>
+	</log>
+	<!-- Store incoming response json array -->
+	<property name="courseData_response" scope="default" expression="json-eval($)" type="JSON"/>
+	<switch source="$axis2:HTTP_SC">
+		<case regex="200">
+			<property name="response_page" scope="default" expression="json-eval($.page)" type="INTEGER"/>
+			<property name="response_total_pages" scope="default" expression="json-eval($.total_pages)" type="INTEGER"/>
+
+			<filter  xpath="get-property('response_page') = get-property('response_total_pages')">
+				<then>
+					<log level="custom">
+						<property name="###### No More Pages ######" expression="'END OF PAGINATION'"/>
+					</log>
+				</then>
+				<else>
+					<sequence key="GetCourseDataPagniated"/>
+				</else>
+			</filter>
+
+		</case>
+		<default/>
+	</switch>
+</sequence>
