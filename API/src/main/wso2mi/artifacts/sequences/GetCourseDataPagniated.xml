@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <sequence name="GetCourseDataPagniated" statistics="enable" trace="enable" xmlns="http://ws.apache.org/ns/synapse">
 	<!-- set per page value as 100 -->
-	<property value="https://reqres.in/api/users" name="apiurl" scope="default" type="INTEGER"/>
-	<property value="2" name="perPage" scope="default" type="INTEGER"/>
+	<property value="https://reqres.in/api/users" name="apiurl" scope="default"/>
+	<property value="2" name="perPage" scope="default"/>
 	<log level="custom">
 		<property name="Message" value=" ****** Executing GetCourseDataPagniated ****** "/>
 		<property name="perPage_value" expression="$ctx:perPage"/>
