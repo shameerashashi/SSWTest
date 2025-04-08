@@ -33,8 +33,8 @@
 	<property name="courseData_response" scope="default" expression="json-eval($)" type="JSON"/>
 	<switch source="$axis2:HTTP_SC">
 		<case regex="200">
-			<property name="response_page" scope="default" expression="json-eval($.page)" type="INTEGER"/>
-			<property name="response_total_pages" scope="default" expression="json-eval($.total_pages)" type="INTEGER"/>
+			<property name="response_page" scope="default" expression="json-eval($.page)"/>
+			<property name="response_total_pages" scope="default" expression="json-eval($.total_pages)"/>
 
 			<filter  xpath="get-property('response_page') = get-property('response_total_pages')">
 				<then>
