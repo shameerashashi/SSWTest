@@ -17,18 +17,17 @@
 		mc.setProperty('page', page);
         mc.setProperty("querySuffix", querySuffix);]]></script>
 	<property expression="fn:concat($ctx:apiurl, $ctx:querySuffix)" name="uri.var.GetCourseData" scope="default" type="STRING"/>
-
-	<header expression="fn:concat($ctx:apiurl, $ctx:querySuffix)" name="To" scope="default"/>
 	<log level="custom">
 		<property name="message" value="Before get course data"/>
 		<property expression="$ctx:uri.var.GetCourseData" name="url"/>
 	</log>
-	<call blocking="true">
-        <endpoint key="EP-MYEQ-98-DSS-DEFAULT"/>
-    </call>
+	<call>
+		<endpoint>
+			<http method="get" uri-template="{uri.var.GetCourseData}"/>
+		</endpoint>
+	</call>
 	<log>
 		<property name="message" value="After get course data"/>
-		<property expression="$body" name="response"/>
 		<property expression="json-eval($)" name="response_Json"/>
 	</log>
 	<!-- Store incoming response json array -->
