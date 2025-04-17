@@ -5,7 +5,22 @@
             <property name="messageType" value="application/json" scope="axis2"/>
             <property name="NO_ENTITY_BODY" scope="axis2" action="remove"/>
             <property value="1" name="page" scope="default" type="INTEGER"/>
-            <sequence key="GetCourseDataPagniated"/>
+
+    <script language="js"><![CDATA[
+        var with_enrollments = true;
+        var search_term = "ABC";
+        var enrollment_term_id = "123";
+        
+        var querySuffix = "?with_enrollments=" + with_enrollments + "&search_term=" + search_term;
+        mc.setProperty("querySuffix", querySuffix);]]></script>
+    
+    <log level="custom">
+        <property name="message" value="Before get course data"/>
+        <property name="querySuffix" expression="$ctx:querySuffix"/>
+    </log>
+
+
+            <!--<sequence key="GetCourseDataPagniated"/> -->
             <respond/>
         </inSequence>
     </resource>
