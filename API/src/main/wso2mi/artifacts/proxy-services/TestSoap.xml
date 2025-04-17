@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<proxy name="TestSoap" startOnLoad="true" transports="http https" xmlns="http://ws.apache.org/ns/synapse">
+    <target>
+        <inSequence>
+            <payloadFactory media-type="xml">
+                <format>
+                    <soap:Envelope xmlns:ser="http://services.samples" xmlns:soap="http://www.w3.org/2003/05/soap-envelope" xmlns:xsd="http://services.samples/xsd">
+                        <soap:Header/>
+                        <soap:Body>
+                            <ser:getQuote>
+                                <ser:request>
+                                    <xsd:symbol>IBM</xsd:symbol>
+                                </ser:request>
+                            </ser:getQuote>
+                        </soap:Body>
+                    </soap:Envelope>
+                </format>
+                <args/>
+            </payloadFactory>
+            <property name="messageType" scope="axis2" type="STRING" value="text/xml"/>
+            <log level="full">
+                <property name="ChangedEnve" value="----Changed-------"/>
+            </log>
+            <respond/>
+        </inSequence>
+        <outSequence/>
+        <faultSequence/>
+    </target>
+</proxy>
