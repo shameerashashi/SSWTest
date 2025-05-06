@@ -5,6 +5,8 @@
             <property name="messageType" value="application/json" scope="axis2"/>
 
             <property value="https://wso2test.free.beeceptor.com/data" name="uri.var.GetCourseData" scope="default" type="STRING"/>
+            <property name="messageType" scope="axis2" type="STRING" value="application/json"/>
+            <property name="Content-Type" scope="transport" type="STRING" value="application/json"/>
 	
             <call>
 		        <endpoint key="GetCourseDataEndpoint"/>
