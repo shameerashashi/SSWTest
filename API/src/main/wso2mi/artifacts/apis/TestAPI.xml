@@ -2,30 +2,25 @@
     <resource methods="POST">
         <inSequence>
             <!-- Ensure JSON message format -->
-            <script description="Transform response" language="js">
-                   <![CDATA[var data = mc.getPayloadJSON();
-                      var resultArray = [];
-                      for(var i = 0; i < data.length; i++) {
-                          var srcCode = "";
-                          var memIdnum = "";
-                          if (data[i].genericRecord && data[i].genericRecord.genericRecordId) {
-                              srcCode = data[i].genericRecord.genericRecordId.srcCode || "";
-                              memIdnum = data[i].genericRecord.genericRecordId.memIdnum || "";
-                              var recordObj = {
-                                  "genericRecord": {
+            <payloadFactory media-type="json" template-type="freemarker">
+                <format><![CDATA[
+                [
+                <#list payload as record>
+                        {
+                        "genericRecord": {
                                       "genericRecordId": {
-                                          "srcCode": srcCode,
-                                          "memIdnum": memIdnum
+                                          "srcCode": "${record.genericRecord.genericRecordId.srcCode}",
+                                          "memIdnum": "${record.genericRecord.genericRecordId.memIdnum}"
                                       }
                                   },
-                                  "score": data[i].score
-                              };
-                              resultArray.push(recordObj);   
-                            } 
-                      }             
-                  	  mc.setPayloadJSON(resultArray);
-                  	]]>
-                    </script>
+                                  "score": ${record.score}
+                        }
+                        <#sep>,</#sep>
+                        </#list>
+                ]
+                ]]></format>
+                <args/>
+            </payloadFactory>
             <respond/>
         </inSequence>
     </resource>
