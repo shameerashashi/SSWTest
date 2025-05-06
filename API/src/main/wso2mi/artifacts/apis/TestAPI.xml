@@ -2,6 +2,8 @@
     <resource methods="POST">
         <inSequence>
             <!-- Ensure JSON message format -->
+            <property name="messageType" scope="axis2" type="STRING" value="application/json"/>
+            <property name="Content-Type" scope="transport" type="STRING" value="application/json"/>
             <payloadFactory media-type="json" template-type="freemarker">
                 <format><![CDATA[
                 [
