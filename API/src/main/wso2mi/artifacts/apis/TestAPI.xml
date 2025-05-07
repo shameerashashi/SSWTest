@@ -12,7 +12,7 @@
                         "genericRecord": {
                                       "genericRecordId": {
                                           "srcCode": "${record.genericRecord.genericRecordId.srcCode}",
-                                          "memIdnum": "${record.genericRecord.genericRecordId.memIdnum}"
+                                          "memIdnum": "${record.genericRecord.genericRecordId.memIdnum?replace("\n", "")}"
                                       }
                                   },
                                   "score": ${record.score}
