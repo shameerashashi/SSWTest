@@ -7,8 +7,7 @@
             <payloadFactory media-type="json" template-type="freemarker">
                 <format><![CDATA[
                 [
-                <#assign payload = payload?replace("\n", "")>
-                <#list payload as record>
+                <#list payload?replace("\n", "") as record>
                         {
                         "genericRecord": {
                                       "genericRecordId": {
