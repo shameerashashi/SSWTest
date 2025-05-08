@@ -3,4 +3,5 @@
     <log level="full">
         <property name="TestMessage" value="############## This is a test message from a Scheduled Task."/>
     </log>
+    <sequence key="GetRecord"/>
 </sequence>

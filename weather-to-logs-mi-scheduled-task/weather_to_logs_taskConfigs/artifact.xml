@@ -2,4 +2,7 @@
     <artifact name="WeatherToLogsSequence" groupId="com.example.sequence" version="1.0.0" type="synapse/sequence" serverRole="EnterpriseServiceBus">
         <file>src/main/synapse-config/sequences/WeatherToLogsSequence.xml</file>
     </artifact>
+    <artifact name="GetRecord" groupId="com.example.sequence" version="1.0.0" type="synapse/sequence" serverRole="EnterpriseServiceBus">
+        <file>src/main/synapse-config/sequences/GetRecord.xml</file>
+    </artifact>
 </artifacts>

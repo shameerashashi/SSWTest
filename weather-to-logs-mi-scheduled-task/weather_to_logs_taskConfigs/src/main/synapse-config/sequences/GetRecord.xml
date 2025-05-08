@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sequence name="GetRecord" trace="enable" xmlns="http://ws.apache.org/ns/synapse">
+  
+  <property name="messageType" scope="axis2" type="STRING" value="application/json"/>
+  <property name="Content-Type" scope="transport" type="STRING" value="application/json"/>
+  <header value="identity" name="Accept-Encoding" scope="transport"/>
+  <call>
+        <endpoint>
+            <http method="get" uri-template="https://wso2test.free.beeceptor.com/data">
+                <suspendOnFailure>
+                    <initialDuration>-1</initialDuration>
+                    <progressionFactor>1</progressionFactor>
+                </suspendOnFailure>
+                <markForSuspension>
+                    <retriesBeforeSuspension>0</retriesBeforeSuspension>
+                </markForSuspension>
+            </http>
+        </endpoint>
+    </call>
+  <log>
+    <property name="message" value="After get course data"/>
+    <property expression="json-eval($)" name="response_Json"/>
+  </log>
+
+</sequence>
