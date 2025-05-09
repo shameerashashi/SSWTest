@@ -9,7 +9,6 @@
   </parent>
   <groupId>com.example</groupId>
   <artifactId>weather_to_logs_taskCompositeExporter</artifactId>
-  <version>1.0.0-SNAPSHOT</version>
   <packaging>carbon/application</packaging>
   <name>weather_to_logs_taskCompositeExporter</name>
   <description>weather_to_logs_taskCompositeExporter</description>
@@ -17,18 +16,11 @@
     <mainSequence>WeatherToLogsSequence</mainSequence>
     <artifact.types>jaggery/app=zip,synapse/priority-executor=xml,synapse/inbound-endpoint=xml,service/rule=aar,synapse/message-store=xml,event/stream=json,service/meta=xml,datasource/datasource=xml,synapse/proxy-service=xml,bpel/workflow=zip,synapse/sequence=xml,synapse/endpointTemplate=xml,carbon/application=car,wso2/gadget=dar,synapse/api=xml,synapse/event-source=xml,synapse/message-processors=xml,event/receiver=xml,lib/dataservice/validator=jar,synapse/template=xml,synapse/endpoint=xml,lib/carbon/ui=jar,lib/synapse/mediator=jar,synapse/metadata=yaml,event/publisher=xml,synapse/local-entry=xml,synapse/task=xml,webapp/jaxws=war,registry/resource=zip,synapse/configuration=xml,service/axis2=aar,synapse/lib=zip,synapse/sequenceTemplate=xml,event/execution-plan=siddhiql,service/dataservice=dbs,web/application=war,lib/library/bundle=jar</artifact.types>
     <com.example.sequence_._WeatherToLogsSequence>capp/EnterpriseServiceBus</com.example.sequence_._WeatherToLogsSequence>
-    <com.example.sequence_._GetRecord>capp/EnterpriseServiceBus</com.example.sequence_._GetRecord>
   </properties>
   <dependencies>
     <dependency>
       <groupId>com.example.sequence</groupId>
       <artifactId>WeatherToLogsSequence</artifactId>
-      <version>1.0.0</version>
-      <type>xml</type>
-    </dependency>
-    <dependency>
-      <groupId>com.example.sequence</groupId>
-      <artifactId>GetRecord</artifactId>
       <version>1.0.0</version>
       <type>xml</type>
     </dependency>

@@ -3,5 +3,24 @@
     <log level="full">
         <property name="TestMessage" value="############## This is a test message from a Scheduled Task."/>
     </log>
-    <sequence key="GetRecord"/>
+    <property name="messageType" scope="axis2" type="STRING" value="application/json"/>
+    <property name="Content-Type" scope="transport" type="STRING" value="application/json"/>
+    <header name="Accept-Encoding" scope="transport" value="identity"/>
+    <call>
+        <endpoint>
+            <http method="get" uri-template="https://wso2test.free.beeceptor.com/data">
+                <suspendOnFailure>
+                    <initialDuration>-1</initialDuration>
+                    <progressionFactor>1</progressionFactor>
+                </suspendOnFailure>
+                <markForSuspension>
+                    <retriesBeforeSuspension>0</retriesBeforeSuspension>
+                </markForSuspension>
+            </http>
+        </endpoint>
+    </call>
+    <log>
+        <property name="message" value="After get course data"/>
+        <property expression="json-eval($)" name="response_Json"/>
+    </log>
 </sequence>
