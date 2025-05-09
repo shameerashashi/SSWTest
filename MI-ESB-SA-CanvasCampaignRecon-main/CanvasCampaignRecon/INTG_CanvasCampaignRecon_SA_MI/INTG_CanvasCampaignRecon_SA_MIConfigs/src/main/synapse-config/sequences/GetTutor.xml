@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sequence name="GetTutor" trace="disable" xmlns="http://ws.apache.org/ns/synapse">
+    <class name="com.dvu.recon.TutorHash">
+        <property expression="$ctx:tutorApiPastHrs" name="tutorApiPastHrs"/>
+        <property expression="$ctx:lastRuntime" name="lastRunTime"/>
+        <property expression="$ctx:apiSharedSecret" name="apiSharedSecret"/>
+        <property expression="$ctx:programGuid" name="programGuid"/>
+    </class>
+    <log>
+        <property expression="$ctx:lastRuntime" name="lastRunTime"/>
+        <property expression="get-property('startDate')" name="startDate"/>
+        <property expression="get-property('endDate')" name="endDate"/>
+        <property expression="get-property('nowDate')" name="nowDate"/>
+    </log>
+    <payloadFactory media-type="json" template-type="freemarker">
+        <format><![CDATA[{
+            "ProgramGuid" : "${ctx.programGuid}",
+            "StartDate" : "${ctx.startDate}",
+            "EndDate" : "${ctx.endDate}",
+            "Now" : "${ctx.nowDate}",
+            "Hash" : "${ctx.hashstring}"
+            }]]></format>
+        <args/>
+    </payloadFactory>
+    <log>
+        <property name="message" value="Before tutor request"/>
+        <property expression="$body" name="payload"/>
+    </log>
+    <property name="messageType" scope="axis2" type="STRING" value="application/json"/>
+    <property action="remove" name="REST_URL_POSTFIX" scope="axis2"/>
+    <call>
+        <endpoint key="TutorEndpoint"/>
+        <source type="body"/>
+        <target type="body"/>
+    </call>
+    <log>
+        <property name="message" value="After tutor request"/>
+        <property expression="$body" name="response"/>
+        <property expression="$axis2:HTTP_SC" name="status"/>
+    </log>
+    <filter source="$axis2:HTTP_SC" regex="200|201">
+      <then>
+        <property expression="json-eval($)" name="tutorData" scope="default" type="STRING"/>
+      </then>
+      <else>
+        <log category="ERROR" level="full">
+          <property name="message" value="Failed to get tutor data"/>
+          <property name="ERROR_MESSAGE" expression="$ctx:ERROR_MESSAGE"/>
+        </log>
+        <property value="null" name="tutorData" scope="default" type="STRING"/>
+      </else>
+    </filter>
+</sequence>

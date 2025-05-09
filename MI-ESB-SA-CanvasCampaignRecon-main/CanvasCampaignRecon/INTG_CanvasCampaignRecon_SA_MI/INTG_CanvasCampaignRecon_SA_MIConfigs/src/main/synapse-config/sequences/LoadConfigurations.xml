@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sequence name="LoadConfigurations" trace="enable" xmlns="http://ws.apache.org/ns/synapse">
+    <propertyGroup>
+        <property name="INTEGRATION_NAME" scope="default" type="STRING" value="INTG_CAMPAIGN_RECONCILIATION"/>
+        <property name="INSTITUTION" scope="default" type="STRING" value="DVU"/>
+    </propertyGroup>
+    <call-template target="INTG_DVG_LoadConfig">
+        <with-param name="integrationName" value="{$ctx:INTEGRATION_NAME}"/>
+        <with-param name="institution" value="{$ctx:INSTITUTION}"/>
+    </call-template>
+
+    <property name="uri.var.tutoringCampaignProtocol" expression="$ctx:tutoringCampaignProtocol"/>
+    <property name="uri.var.tutoringCampaignHost" expression="$ctx:tutoringCampaignHost"/>
+    <property name="uri.var.tutoringCampaignPort" expression="$ctx:tutoringCampaignPort"/>
+    <property name="uri.var.tutorProtocol" expression="$ctx:tutorProtocol"/>
+    <property name="uri.var.tutorHost" expression="$ctx:tutorHost"/>
+    <property name="uri.var.tutorPort" value="443"/>
+
+</sequence>

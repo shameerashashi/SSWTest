@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sequence name="GetLastRuntime" trace="enable" xmlns="http://ws.apache.org/ns/synapse">
+    <property name="lastRuntime" expression="$ctx:lastRuntime"/>
+    <log>
+        <property name="message" value="Fetching the last run time"/>
+        <property expression="$ctx:lastRuntime" name="lastRuntime"/>
+    </log>
+</sequence>

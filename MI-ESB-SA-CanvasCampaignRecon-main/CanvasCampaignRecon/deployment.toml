@@ -1,0 +1,11 @@
+[server]
+hide_admin_service_wsdl = "false"
+
+[[datasource]]
+id = "DVG_WSO2_MYSQL"
+url= "$env{MYSQL_DVG_DB_URL}"
+username="$env{MYSQL_DVG_DB_USERNAME}"
+password="$env{MYSQL_DVG_DB_PASSWORD}"
+driver="com.mysql.jdbc.Driver"
+pool_options.maxActive=150
+pool_options.validationQuery = "SELECT 1"

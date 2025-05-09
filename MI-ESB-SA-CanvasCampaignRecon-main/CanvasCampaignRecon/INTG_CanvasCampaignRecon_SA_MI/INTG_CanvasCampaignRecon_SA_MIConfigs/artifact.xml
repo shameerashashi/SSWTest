@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?><artifacts>
+    <artifact name="UnhandledException" groupId="com.dvu.wso2.sequence" version="1.0.0" type="synapse/sequence" serverRole="EnterpriseServiceBus">
+        <file>src/main/synapse-config/sequences/UnhandledException.xml</file>
+    </artifact>
+    <artifact name="CampaignReconciliationSeq" groupId="com.dvu.wso2.sequence" version="1.0.0" type="synapse/sequence" serverRole="EnterpriseServiceBus">
+        <file>src/main/synapse-config/sequences/CampaignReconciliationSeq.xml</file>
+    </artifact>
+    <artifact name="GetTutoringCampaign" groupId="com.dvu.wso2.sequence" version="1.0.0" type="synapse/sequence" serverRole="EnterpriseServiceBus">
+        <file>src/main/synapse-config/sequences/GetTutoringCampaign.xml</file>
+    </artifact>
+    <artifact name="GetTutor" groupId="com.dvu.wso2.sequence" version="1.0.0" type="synapse/sequence" serverRole="EnterpriseServiceBus">
+        <file>src/main/synapse-config/sequences/GetTutor.xml</file>
+    </artifact>
+    <artifact name="PostDataToTutoringCampaign" groupId="com.dvu.wso2.sequence" version="1.0.0" type="synapse/sequence" serverRole="EnterpriseServiceBus">
+        <file>src/main/synapse-config/sequences/PostDataToTutoringCampaign.xml</file>
+    </artifact>
+    <artifact name="LoadConfigurations" groupId="com.dvu.wso2.sequence" version="1.0.0" type="synapse/sequence" serverRole="EnterpriseServiceBus">
+        <file>src/main/synapse-config/sequences/LoadConfigurations.xml</file>
+    </artifact>
+    <artifact name="GetLastRuntime" groupId="com.dvu.wso2.sequence" version="1.0.0" type="synapse/sequence" serverRole="EnterpriseServiceBus">
+        <file>src/main/synapse-config/sequences/GetLastRuntime.xml</file>
+    </artifact>
+    <artifact name="UpdateLastRuntime" groupId="com.dvu.wso2.sequence" version="1.0.0" type="synapse/sequence" serverRole="EnterpriseServiceBus">
+        <file>src/main/synapse-config/sequences/UpdateLastRuntime.xml</file>
+    </artifact>
+    <artifact name="TutorEndpoint" groupId="com.dvu.wso2.endpoint" version="1.0.0" type="synapse/endpoint" serverRole="EnterpriseServiceBus">
+        <file>src/main/synapse-config/endpoints/TutorEndpoint.xml</file>
+    </artifact>
+    <artifact name="StudentCampaignEndpoint" groupId="com.dvu.wso2.endpoint" version="1.0.0" type="synapse/endpoint" serverRole="EnterpriseServiceBus">
+        <file>src/main/synapse-config/endpoints/StudentCampaignEndpoint.xml</file>
+    </artifact>
+    <artifact name="CampaingReconcilliationEndpoint" groupId="com.dvu.wso2.endpoint" version="1.0.0" type="synapse/endpoint" serverRole="EnterpriseServiceBus">
+        <file>src/main/synapse-config/endpoints/CampaingReconcilliationEndpoint.xml</file>
+    </artifact>
+</artifacts>

@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sequence name="PostDataToTutoringCampaign" trace="disable" xmlns="http://ws.apache.org/ns/synapse">
+    <log>
+        <property name="message" value="Before creating payload"/>
+        <property expression="$ctx:tutoringCampaignData" name="tutoringCampaignData"/>
+        <property expression="$ctx:tutorData" name="tutorData"/>
+    </log>
+    <!-- used script mediator to loop through the two arrays and to create the required final json array -->
+    <script language="js"><![CDATA[
+      var tutoringCampaignData = JSON.parse(mc.getProperty('tutoringCampaignData'));
+      var tutoringCampaignItems = tutoringCampaignData.items;
+      var tutorData = JSON.parse(mc.getProperty('tutorData'));
+      var log = mc.getServiceLog();
+    
+
+      var dataArray = [];
+      for(var i = 0; i < tutoringCampaignItems.length; i++) {
+        for(var x = 0; x < tutorData.length; x++)
+          {
+            if(tutorData[x].StudentUsername == tutoringCampaignItems[i].keys.canvas_dnumber_student)
+              {
+                var SessionTranscriptURL = tutorData[x].SessionTranscriptURL;
+                dataArray.push({ 
+                  "dateTime": tutorData[x].DateTime,
+                  "grade": tutorData[x].Grade,
+                  "parentClassification": tutorData[x].ParentClassification,
+                  "studentFirstName": tutorData[x].StudentFirstName,
+                  "studentLastName": tutorData[x].StudentLastName,
+                  "studentUserName": tutorData[x].StudentUsername,
+                  "subject": tutorData[x].Subject,
+                  "tutorDisplayName": tutorData[x].TutorDisplayName,
+                  "sessionGUID": tutorData[x].SessionGUID
+                });
+              }
+          }
+      }
+      var full_json_string = JSON.stringify(dataArray);
+      log.info(full_json_string);
+      mc.setProperty('CampaignData', full_json_string);
+    ]]></script>
+    <log>
+           <property name="JSONCampaignData" expression="$ctx:CampaignData" />
+    </log>
+    <!-- adding the final json array to the payload -->    
+    <payloadFactory media-type="json" template-type="freemarker">
+      <format><![CDATA[
+          ${ctx.CampaignData}
+        ]]>
+      </format>
+    </payloadFactory>
+    <log>
+        <property name="message" value="After creating payload"/>
+        <property expression="$body" name="payload"/>
+    </log>
+    <filter source="json-eval($.)" regex="\[\]">
+      <then>
+        <log>
+            <property name="message" value="Payload is empty"/>
+        </log>
+          
+      </then>
+      <else>
+        <call>
+            <endpoint key="CampaingReconcilliationEndpoint"/>
+            <source type="body"/>
+            <target type="body"/>
+        </call>
+        <filter source="$axis2:HTTP_SC" regex="200|201">
+          <then>
+            <log level="full">
+              <property name="message" value="Successfully posted data to tutoring campaign"/>
+            </log>
+            <sequence key="UpdateLastRuntime"/>
+              
+          </then>
+          <else>
+            <log category="ERROR" level="full">
+              <property name="message" value="Failed to post data to tutoring campaign"/>
+              <property name="ERROR_MESSAGE" expression="$ctx:ERROR_MESSAGE"/>
+              <property name="status" expression="$axis2:HTTP_SC"/>
+              <property name="payload" expression="$body"/>
+            </log>
+          </else>
+        </filter>
+      </else>
+    </filter>
+
+
+</sequence>

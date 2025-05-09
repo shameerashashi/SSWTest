@@ -1,0 +1,6 @@
+[submodule "CanvasCampaignRecon/MI-ESB-UTIL-Common"]
+	path = CanvasCampaignRecon/MI-ESB-UTIL-Common
+	url = https://github.com/DeVryUniversity/MI-ESB-UTIL-Common.git
+[submodule "CanvasCampaignRecon/MI-ESB-UTIL-Config"]
+	path = CanvasCampaignRecon/MI-ESB-UTIL-Config
+	url = https://github.com/DeVryUniversity/MI-ESB-UTIL-Config.git

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>com.dvu.wso2</groupId>
+    <artifactId>INTG_CanvasCampaignRecon_SA_MIConfigs</artifactId>
+    <version>1.0.0</version>
+  </parent>
+  <groupId>com.dvu.wso2</groupId>
+  <artifactId>INTG_CanvasCampaignRecon_SA_MIConfigs_module</artifactId>
+  <version>1.0.0</version>
+  <packaging>pom</packaging>
+  <name>INTG_CanvasCampaignRecon_SA_MIConfigs_module</name>
+  <description>INTG_CanvasCampaignRecon_SA_MIConfigs_module</description>
+  <modules>
+    <module>sequences/CampaignReconciliationSeq</module>
+  </modules>
+</project>

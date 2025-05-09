@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sequence name="GetTutoringCampaign" trace="disable" xmlns="http://ws.apache.org/ns/synapse">
+    <log>
+        <property name="message" value="Before tutoring campaign request"/>
+    </log>
+    <call>
+        <endpoint key="StudentCampaignEndpoint"/>
+        <target type="body"/>
+    </call>
+    <log>
+        <property name="message" value="After tutoring campaign request"/>
+        <property expression="$body" name="response"/>
+        <property expression="$axis2:HTTP_SC" name="status"/>
+    </log>
+    <filter source="$axis2:HTTP_SC" regex="200|201">
+      <then>
+        <property expression="json-eval($)" name="tutoringCampaignData" scope="default" type="STRING"/>
+      </then>
+      <else>
+        <log category="ERROR" level="full">
+          <property name="message" value="Failed to get tutoring campaign data"/>
+          <property name="ERROR_MESSAGE" expression="$ctx:ERROR_MESSAGE"/>
+        </log>
+        <property value="null" name="tutoringCampaignData" scope="default" type="STRING"/>
+      </else>
+    </filter>
+</sequence>

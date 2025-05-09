@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sequence name="CampaignReconciliationSeq" onError="UnhandledException" statistics="enable" trace="enable" xmlns="http://ws.apache.org/ns/synapse">
+    <sequence key="LoadConfigurations"/>
+    <log>
+        <property name="message" value="Before GetLastRuntime Sequence"/>
+        <property name="lastExecutionTime" expression="$ctx:lastRuntime"/>
+    </log>
+    <sequence key="GetLastRuntime"/>
+    <log>
+        <property name="message" value="CampaignReconciliationSeq init"/>
+        <property name="lastExecutionTime" expression="$ctx:lastRuntime"/>
+    </log>
+    <sequence key="GetTutor"/>
+    <filter source="$ctx:tutorData" regex="null">
+      <then>
+        <log category="ERROR" level="full">
+          <property name="message" value="Tutor data not found"/>
+          <property name="ERROR_MESSAGE" expression="$ctx:ERROR_MESSAGE"/>
+        </log>
+      </then>
+      <else>
+        <sequence key="GetTutoringCampaign"/>
+        <filter source="$ctx:tutoringCampaignData" regex="null">
+          <then>
+            <log category="ERROR" level="full">
+              <property name="message" value="Tutoring campaign data not found"/>
+              <property name="ERROR_MESSAGE" expression="$ctx:ERROR_MESSAGE"/>
+            </log>
+          </then>
+          <else>
+            <sequence key="PostDataToTutoringCampaign"/>
+          </else>
+        </filter>
+      </else>
+    </filter>
+
+</sequence>

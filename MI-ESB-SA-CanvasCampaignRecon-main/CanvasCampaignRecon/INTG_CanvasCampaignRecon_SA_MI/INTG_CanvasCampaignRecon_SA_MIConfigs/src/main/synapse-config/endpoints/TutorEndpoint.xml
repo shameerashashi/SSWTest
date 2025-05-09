@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<endpoint name="TutorEndpoint" xmlns="http://ws.apache.org/ns/synapse">
+    <http method="post" trace="enable" uri-template="{uri.var.tutorProtocol}://{uri.var.tutorHost}:{uri.var.tutorPort}/api/json/ReportsAPI/PostIndividualStudentSessions">
+        <suspendOnFailure>
+            <initialDuration>-1</initialDuration>
+            <progressionFactor>1.0</progressionFactor>
+        </suspendOnFailure>
+        <markForSuspension>
+            <retriesBeforeSuspension>0</retriesBeforeSuspension>
+        </markForSuspension>
+    </http>
+</endpoint>

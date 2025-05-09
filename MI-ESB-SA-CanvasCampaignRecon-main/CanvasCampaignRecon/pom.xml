@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.dvu.wso2</groupId>
+  <artifactId>ESB</artifactId>
+  <version>1.0.0</version>
+  <packaging>pom</packaging>
+  <name>ESB</name>
+  <description>ESB</description>
+  <modules>
+    <module>MI-ESB-UTIL-Common</module>
+    <module>MI-ESB-UTIL-Config</module>
+    <module>INTG_CanvasCampaignRecon_SA_MI</module>
+  </modules>
+  <properties>
+    <project.scm.id>integration-project</project.scm.id>
+    <project.runtime.version>4.2.0</project.runtime.version>
+    <mainSequence>CampaignReconciliationSeq</mainSequence>
+  </properties>
+  <build>
+    <plugins>
+      <plugin>
+        <artifactId>maven-eclipse-plugin</artifactId>
+        <version>2.9</version>
+        <configuration>
+          <buildcommands />
+          <projectnatures>
+            <projectnature>org.wso2.developerstudio.eclipse.mavenmultimodule.project.nature</projectnature>
+          </projectnatures>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
+</project>

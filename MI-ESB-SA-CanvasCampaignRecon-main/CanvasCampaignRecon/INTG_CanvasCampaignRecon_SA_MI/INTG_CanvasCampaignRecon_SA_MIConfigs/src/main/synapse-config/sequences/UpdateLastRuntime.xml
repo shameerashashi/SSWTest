@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sequence name="UpdateLastRuntime" trace="enable" xmlns="http://ws.apache.org/ns/synapse">
+    <property name="currentTime" expression="get-property('SYSTEM_DATE','yyyyMMddHHmmss')"/>
+    <property name="modificationTime" expression="get-property('SYSTEM_DATE','yyyy-MM-dd HH:mm:ss')"/>
+    <dbreport xmlns="http://ws.apache.org/ns/synapse">
+        <connection>
+            <pool>
+                <dsName>jdbc/DVG_WSO2_MYSQL</dsName>
+            </pool>
+        </connection>
+        <statement>
+            <sql><![CDATA[UPDATE dvu.config SET VALUE=? , LAST_MODIFICATION_DATE = ? where INTG_NAME=? and INSTITUTION=? and `KEY`='lastRuntime']]></sql>
+            <parameter expression="$ctx:currentTime" type="VARCHAR"/>
+            <parameter expression="$ctx:modificationTime" type="VARCHAR"/>
+            <parameter expression="$ctx:INTEGRATION_NAME" type="VARCHAR"/>
+            <parameter expression="$ctx:INSTITUTION" type="VARCHAR"/>
+        </statement>
+    </dbreport>
+</sequence>
