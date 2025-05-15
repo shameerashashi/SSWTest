@@ -11,6 +11,7 @@
   <modules>
     <module>INTG_CanvasCampaignRecon_SA_MIConfigs</module>
     <module>INTG_CanvasCampaignRecon_SA_MICompositeExporter</module>
+    <module>TutorHashMediator</module>
   </modules>
   <properties>
     <project.scm.id>integration-project</project.scm.id>

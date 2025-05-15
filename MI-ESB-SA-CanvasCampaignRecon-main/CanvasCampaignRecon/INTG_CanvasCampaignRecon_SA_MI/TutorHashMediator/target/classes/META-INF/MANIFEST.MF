@@ -1,0 +1,17 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Created-By: Apache Maven Bundle Plugin
+Tool: Bnd-1.15.0
+Bnd-LastModified: 1747289122027
+Export-Package: com.dvu.recon;uses:="javax.crypto,org.apache.synapse.med
+ iators,org.apache.commons.logging,javax.crypto.spec,org.apache.synapse"
+Import-Package: javax.crypto,javax.crypto.spec,org.apache.commons.loggin
+ g,org.apache.synapse,org.apache.synapse.mediators
+Bundle-Name: TutorHashMediator
+Bundle-Description: TutorHashMediator
+Bundle-SymbolicName: TutorHashMediator
+DynamicImport-Package: *
+Bundle-Version: 1.0.0.SNAPSHOT
+Built-By: shameerasw
+Build-Jdk: 17.0.2
+
