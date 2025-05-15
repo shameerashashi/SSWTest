@@ -57,7 +57,7 @@
         <log>
             <property name="message" value="Payload is empty"/>
         </log>
-          
+        <respond/>  
       </then>
       <else>
         <call>
