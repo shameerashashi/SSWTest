@@ -20,7 +20,25 @@
         </endpoint>
     </call>
     <log>
-        <property name="message" value="After get data"/>
+        <property name="message" value="After get data 1"/>
+        <property expression="json-eval($)" name="response_Json"/>
+    </log>
+
+    <call>
+        <endpoint>
+            <http method="get" uri-template="https://wso2test.free.beeceptor.com/campaigndata">
+                <suspendOnFailure>
+                    <initialDuration>-1</initialDuration>
+                    <progressionFactor>1</progressionFactor>
+                </suspendOnFailure>
+                <markForSuspension>
+                    <retriesBeforeSuspension>0</retriesBeforeSuspension>
+                </markForSuspension>
+            </http>
+        </endpoint>
+    </call>
+    <log>
+        <property name="message" value="After get data 2"/>
         <property expression="json-eval($)" name="response_Json"/>
     </log>
 </sequence>
