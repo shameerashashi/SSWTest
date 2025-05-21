@@ -20,6 +20,10 @@
       </then>
       <else>
         <sequence key="GetTutoringCampaign"/>
+        <log>
+          <property name="message" value="After GetTutoringCampaign"/>
+        </log>
+        <!--
         <filter source="$ctx:tutoringCampaignData" regex="null">
           <then>
             <log category="ERROR" level="full">
@@ -31,6 +35,7 @@
             <sequence key="PostDataToTutoringCampaign"/>
           </else>
         </filter>
+        -->
       </else>
     </filter>
 </sequence>

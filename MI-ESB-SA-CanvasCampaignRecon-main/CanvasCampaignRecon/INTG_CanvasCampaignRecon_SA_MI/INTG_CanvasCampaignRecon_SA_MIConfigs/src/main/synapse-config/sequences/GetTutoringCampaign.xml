@@ -14,7 +14,13 @@
     </log>
     <filter source="$axis2:HTTP_SC" regex="200|201">
       <then>
+        <log>
+          <property name="message" value="Then 1"/>
+        </log>
         <property expression="json-eval($)" name="tutoringCampaignData" scope="default" type="STRING"/>
+        <log>
+          <property name="message" value="Then 2"/>
+        </log>
       </then>
       <else>
         <log category="ERROR" level="full">

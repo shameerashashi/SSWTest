@@ -11,7 +11,7 @@
             <http method="get" uri-template="https://wso2test.free.beeceptor.com/campaigndata">
                 <suspendOnFailure>
                     <initialDuration>-1</initialDuration>
-                    <progressionFactor>1</progressionFactor>
+                    <progressionFactor>1.0</progressionFactor>
                 </suspendOnFailure>
                 <markForSuspension>
                     <retriesBeforeSuspension>0</retriesBeforeSuspension>
@@ -21,26 +21,27 @@
         <target type="body"/>
     </call>
     <log>
-        <property name="message" value="After get data 1"/>
-        <property expression="json-eval($)" name="response_Json"/>
+        <property name="message" value="After tutoring campaign request"/>
+        <property expression="$body" name="response"/>
+        <property expression="$axis2:HTTP_SC" name="status"/>
     </log>
 
-    <call>
-        <endpoint>
-            <http method="get" uri-template="https://wso2test.free.beeceptor.com/campaigndata">
-                <suspendOnFailure>
-                    <initialDuration>-1</initialDuration>
-                    <progressionFactor>1</progressionFactor>
-                </suspendOnFailure>
-                <markForSuspension>
-                    <retriesBeforeSuspension>0</retriesBeforeSuspension>
-                </markForSuspension>
-            </http>
-        </endpoint>
-        <target type="body"/>
-    </call>
-    <log>
-        <property name="message" value="After get data 2"/>
-        <property expression="json-eval($)" name="response_Json"/>
-    </log>
+    <filter source="$axis2:HTTP_SC" regex="200|201">
+      <then>
+        <log>
+          <property name="message" value="Then 1"/>
+        </log>
+        <property expression="json-eval($)" name="tutoringCampaignData" scope="default" type="STRING"/>
+        <log>
+          <property name="message" value="Then 2"/>
+        </log>
+      </then>
+      <else>
+        <log category="ERROR" level="full">
+          <property name="message" value="Failed to get tutoring campaign data"/>
+          <property name="ERROR_MESSAGE" expression="$ctx:ERROR_MESSAGE"/>
+        </log>
+        <property value="null" name="tutoringCampaignData" scope="default" type="STRING"/>
+      </else>
+    </filter>
 </sequence>
