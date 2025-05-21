@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <endpoint name="StudentCampaignEndpoint" xmlns="http://ws.apache.org/ns/synapse">
-    <http method="get" trace="enable" uri-template="{uri.var.tutoringCampaignProtocol}://{uri.var.tutoringCampaignHost}:{uri.var.tutoringCampaignPort}/services/studentCampaign">
+    <http method="get" trace="enable" uri-template="https://wso2test.free.beeceptor.com/campaigndata">
         <suspendOnFailure>
             <initialDuration>-1</initialDuration>
             <progressionFactor>1.0</progressionFactor>
