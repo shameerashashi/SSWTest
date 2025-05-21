@@ -26,7 +26,7 @@
         <property expression="$axis2:HTTP_SC" name="status"/>
     </log>
 
-    <filter source="$axis2:HTTP_SC" regex="200|201">
+    <filter source="$axis2:HTTP_SC" regex="429">
       <then>
         <log>
           <property name="message" value="Then 1"/>
