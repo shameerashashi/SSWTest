@@ -18,6 +18,7 @@
                 </markForSuspension>
             </http>
         </endpoint>
+        <target type="body"/>
     </call>
     <log>
         <property name="message" value="After get data 1"/>
@@ -36,6 +37,7 @@
                 </markForSuspension>
             </http>
         </endpoint>
+        <target type="body"/>
     </call>
     <log>
         <property name="message" value="After get data 2"/>

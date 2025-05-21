@@ -1,17 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <sequence name="CampaignReconciliationSeq" onError="UnhandledException" statistics="enable" trace="enable" xmlns="http://ws.apache.org/ns/synapse">
-    
-    <call>
-        <endpoint key="StudentCampaignEndpoint"/>
-    </call>
-    <log>
-        <property name="message" value="After tutoring campaign request"/>
-        <property expression="$body" name="response"/>
-        <property expression="$axis2:HTTP_SC" name="status"/>
-    </log>
-    
-    
-    <!--<sequence key="LoadConfigurations"/>
+    <sequence key="LoadConfigurations"/>
     <log>
         <property name="message" value="Before GetLastRuntime Sequence"/>
         <property name="lastExecutionTime" expression="$ctx:lastRuntime"/>
@@ -43,5 +32,5 @@
           </else>
         </filter>
       </else>
-    </filter>-->
+    </filter>
 </sequence>
